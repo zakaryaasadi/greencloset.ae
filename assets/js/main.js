@@ -8,7 +8,7 @@ $(document).ready(function(){
     let name = $("#name").val();
     let phone = $("#phone").val();
     let address = $("#address").val();
-    var orderType = "Sell";
+    var orderType = "Greencloset";
     
 
     if(name === ""){
@@ -33,19 +33,13 @@ $(document).ready(function(){
     }
 
 
-    let phoneNo = Math.ceil(  Number(a2e(phone)) / 100 );
-    if(phoneNo < 10000000 || phoneNo > 99999999 || isNaN(phoneNo)){
+    let phoneNo = Number(a2e(phone));
+    if(phoneNo < 100000000 || phoneNo > 999999999 || isNaN(phoneNo)){
       $("#phone_incorrect").css("display","block");
       return;
     }else{
       $("#phone_incorrect").css("display","none");
     }
-
-
-    if($("#donate").is(':checked')){
-      orderType = "Donate:" + $('#charity').find(":selected").val();
-    }
-
 
 
     $("#create-order .loading").css("display","block");
@@ -54,19 +48,19 @@ $(document).ready(function(){
     $("#create-order .dup-message").css("display","none");
     $("#create-order .error-message").css("display","none");
 
-    var country = "البحرين";
+    var country = "الإمارات العربية المتحدة";
     if( $("#send").hasClass("en")){
-      country = "Bahrain";
+      country = "UAE";
     }
 
 
     $.post("https://services.kiswaksa.com/api/task/create",
     {
       name: name,
-      phone: "+973" + phoneNo,
+      phone: "+971" + phoneNo,
       address: country + ", " + address,
       created_by: "Website:" + orderType,
-      country: "BHR"
+      country: "UAE"
     },
   function(data, status){
     $("#create-order .loading").css("display","none");
